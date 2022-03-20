@@ -26,6 +26,12 @@ public class StudentController {
         return name2;
     }
 
+    @GetMapping("/student_3")
+    public String getStudent3 (){
+        StudentResponse str = new StudentResponse((long)1, "john", "smith");
+        return str.toString();
+    }
+
     @GetMapping("/response")
     public StudentResponse getResponse(){
         StudentResponse str = new StudentResponse((long)1, "john", "smith");
