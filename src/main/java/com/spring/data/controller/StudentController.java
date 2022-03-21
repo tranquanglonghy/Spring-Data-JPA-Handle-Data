@@ -1,6 +1,9 @@
 package com.spring.data.controller;
 
+import com.spring.data.entity.StudentEntity;
+import com.spring.data.repository.StudentRepository;
 import com.spring.data.response.StudentResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class StudentController {
+
+    @Autowired
+    StudentRepository repo;
 
     @Value("${app.name}")
     private String name;
@@ -34,6 +40,9 @@ public class StudentController {
 
     @GetMapping("/response")
     public StudentResponse getResponse(){
+        StudentEntity entity = new StudentEntity(1, "Vladimir", "Putin", "Putin@russia");
+        repo.save(entity);
+
         StudentResponse str = new StudentResponse((long)1, "john", "smith");
         return str;
     }
